@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign Up Page</title>
+	<h1><font face="Ubuntu Medium" size="20">E-Library<small color="FF9933"><br>The one place for all educational books and videos...!</small></font></h1>
+	<link href="/static/bootstrap.min.css" rel="stylesheet">
+</head>
+<body background="/static/booknew.jpg">
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3" style="background-color: rgba(0,0,0,0.2); padding: 10px; border-radius: 5px;">
+			
+			<form role="form" action="/accounts/register_user/" method="POST" >
+
+				<h3><font face="Ubuntu Medium">Sign Up</h3>	
+
+				<div class="form-group">
+				 
+				 	<label>User ID</label>
+					<input type = "text" class = "form-control" name = "username" placeholder = "Enter User ID">
+				 
+					<label>Password</label>
+					<input type="password" class="form-control" name = "password" placeholder="Enter Password">
+
+					<label>Email ID</label>
+					<input type = "email" class = "form-control" name = "email" placeholder = "Enter Email ID">
+				
+				
+					<button type="submit" class="btn btn-success active">Sign Up</button>		
+				</div>
+			</form> 
+		</div>
+	</div>
+	 
+
+
+
+
+</div>
+
+<script src="/static/jquery.js"></script>
+<script src="/static/bootstrap.min.js"></script>
+</body>
+</html>

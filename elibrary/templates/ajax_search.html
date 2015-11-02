@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search Books</title>
+
+</head>
+<body>
+{% if books.count > 0 %}
+
+{% for book in books %}
+
+	<li><a href = "/books/get/{{ book.id }}/">{{ book.book_name }}</a></li>
+	
+{% endfor %}
+
+{% else %}
+
+	<li>No Match Found</li>
+
+{% endif %}
+</body>
+</html>

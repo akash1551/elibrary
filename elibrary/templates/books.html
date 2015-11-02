@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<html>
+<body>
+<h1> Books</h1>
+
+{% if books.count > o %}
+
+{% for book in books %}
+<div>
+    <h2><a href='/books/get/{{book.id}}/'>{{book.book_name}}</a>
+    </h2>
+    <p>{{book.author_name|upper|truncatewords:"10"}}</p>
+</div>
+{% endfor %}
+
+{% else %}
+<p>None to show</p>
+
+{% endif %}
+</body>
+</html>
+
+
+{% endblock %}
