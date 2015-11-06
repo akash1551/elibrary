@@ -2,65 +2,56 @@
 <html>
 <head>
 	{% load static %}
-	<title></title>
+	<title>Elibrary</title>
 	<link href="/static/bootstrap.min.css" rel="stylesheet">
 	
 </head>
 <body><font face="Ubuntu Medium">
 
-	<table width="100%" border="1">
-		<tr>
-			<td colspan="2" bgcolor="#800080" height="100">
-				<div class="col-lg-12" class="col-xs-1">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color:#DA81F5;">
 				
 					<div align="right" style="font-size:14px;">
 						<a href="/accounts/login/"><font color="black">LOGIN |</font></a>
 						<a href="/accounts/register/"><font color="black">REGISTER |</font></a>
+						<a href="/accounts/logout/"><font color="black">LOGOUT |</font></a>
 						<a href="/books/uploadbook/"><font color="black">UPLOAD</font></a>
 					</div>
 
 					<a href="/home/" target="_self">
-					<img src="/Media/images/logo_400_reflect.png" border="0"/>
+					<img src="/Media/images/elibrary_logo.png" border="0" class="img-responsive"/>
 					</a>
-				</div>
+			
+				<h1>E-Library<small><font color="black"><br>The one place for all educational books and videos...!</small></h1>
+
+					<nav class="navbar navbar-success" role="navigation">
+						<div>
+
+							<ul class="nav navbar-nav navbar-right">
+								
+								<li class="active"><a href="/home/">HOME</a></li>
+								<li class="active"><a href="/bookview/">BOOKS</a></li> 
+								<li class="active"><a href="/videoview/">VIDEOS</a></li> 
+
+							</ul>
+						</div>
+					</nav>
 
 
-				<div class="col-lg-12">
-
-					<h1>E-Library<small><font color="black"><br>The one place for all educational books and videos...!</small></h1>
-					<div class="col-xs-12 hidden-sm hidden-lg hidden-md" >
-
-						<div class="form-group" class="col-md-1">
-							<div id="menu" align="left">
-								<h5>Catagories</h5>
-								<select class="form-control">
-									<option href="/compview/">Computer</option>
-									<option href="/mechview/">Mechanical</option>
-									<option><a href="/etcview/">Electronics & TeleCommunications</option>
-									<option><a href="/electricalview/">Electrical</option>
-									<option><a href="/itview/">Information Technology</option>
-									<option><a href="/civilview/">Civil Engineering</option>	
-								</select>
-					
-					</div>
+				<div class="col-xs-8 hidden-sm hidden-md hidden-lg" class="form-group">
 					<label for="search">Search</label>
-					<input type="search" class="form-control" id="search" placeholder="Search book or video">
+					<input type="search" class="form-control" id="search" placeholder="Search book or video" >
 					<ul id = "search_results">
 					</ul>
-					<button type="submit" class="btn btn-success">Search</button>
-				</div>
-			</div>
-					<div id="menu" align="right">
-						<a class="btn btn-success active btn-sm" href="/home/">HOME</a>
-						<a class="btn btn-success active btn-sm" href="/bookview/">BOOK</a>
-						<a class="btn btn-success active btn-sm" href="/videoview/">VIDEOS</a>
-					</div>	
-				</div>
-			</td>
-		</tr>
+					<button type="submit" class="btn btn-success">Search</button>					
+				</div>	
 
-		<tr valign="top">
-			<td class="col-sm-3 hidden-xs" bgcolor="#f0f8ff">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-3 col-md-3 col-lg-3 hidden-xs" style="background-color:#f0fff0 border: 1px;">
 				<div class="form-group" >
 					<label for="search">Search</label>
 					<input type="search" class="form-control" id="search" placeholder="Search book or video" >
@@ -76,138 +67,102 @@
 						<a href="/electricalview/"><br>Electrical</a>
 						<a href="/itview/"><br>Information Technology</a>
 						<a href="/civilview/"><br>Civil Engineering</a>
-
-
 					</div>
-
-
 				</div>
-			</td>
-
-			<td style = "background-image:url(/Media/congruent_pentagon.png);" bgcolor="#90ee90" width="230" height="480">
-
-
+			</div>
+			
+			<div class="col-lg-9 col-md-9 col-sm-9" style ="backgrounf-color:#90ee90;">
 
                                                   <!--Show All Categories Books-->
-			<div class="row">
+            
+			
 				{% if tag == "BOOK" %}
 				{% if category == "None" %}
 				{% for i in books %}
 
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+				<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ i.flname }}" style="width:90%; height:250px; margin:10px 5px 10px 10px;">
+								{{ i.book_name}}
+								<p><a href="/editbook/{{ i.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ i.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{i.book_name|truncatewords:"10"}}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
-					</div>
-
-
 				</div>
+
+
+
+
 				{% endfor %}
 				{% endif %}
 				{% endif %}
 
-
+	
 				{% if tag == "VIDEO" %}             
 				{% for i in books %}
-				<div class="col-sm-6"  style="margin: 10px 0px">
+					<div class="col-sm-5" style="margin: 10px 5px 10px 10px">
 
-					<video controls style="width: 100%;">
-						<source src="/Media/{{ i.thumbnail }}" type="video/mp4" style="margin: 10px; "></source><br>{{i.book_name}}
-					</video>
+						<video controls style="width: 100%;">
+							<source src="/Media/{{ i.thumbnail }}" type="video/mp4" style="margin: 10px; " ></source><br>
+						</video>
+						{{ i.book_name }}	
 
-				</div>
+					</div>
 				{% endfor %}
                 {% endif %}
 
 										<!--Show Single Book-->
 				{% if book %}
-
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+					<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ flname }}" style="width:90%; height:250px; margin:10px 10px 10px 10px;">
+								<p><a href="/editbook/{{ book.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ book.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{ i.book_name|truncatewords:"10" }}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
 					</div>
 
-				</div>
+
 				{% endif %}
+
                                         <!--Show CategoryWise Books-->
             {% if tag == "BOOK" %}
 
                 {% if category == "Computer" %}
 				{% for i in books %}
-
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+		       
+				<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ i.flname }}" style="width:90%; height:250px; margin:10px 10px 10px 10px;">
+								{{ i.book_name }}
+								<p><a href="/editbook/{{ i.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ i.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{ i.book_name }}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
-					</div>
-
 				</div>
+
+
+				
 				{% endfor %}
 				{% endif %}
 
                 {% if category == "Mechanical" %}
 				{% for i in books %}
 
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+				<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ i.flname }}" style="width:90%; height:250px; margin:10px 10px 10px 10px;">
+								{{ i.book_name }}
+								<p><a href="/editbook/{{ i.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ i.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{ i.book_name }}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
-					</div>
-
 				</div>
+
 				{% endfor %}
 				{% endif %}
 
@@ -215,79 +170,54 @@
 				{% for i in books %}
 
 				
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+				<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ i.flname }}" style="width:90%; height:250px; margin:10px 10px 10px 10px;">
+								{{ i.book_name }}
+								<p><a href="/editbook/{{ i.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ i.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{ i.book_name }}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
-					</div>
-
 				</div>
+
 				{% endfor %}
 				{% endif %}
 
                 {% if category == "IT" %}
 				{% for i in books %}
 
-				
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+					
+				<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ i.flname }}" style="width:90%; height:250px; margin:10px 10px 10px 10px;">
+								{{ i.book_name }}
+								<p><a href="/editbook/{{ i.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ i.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{ i.book_name }}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
-					</div>
-
 				</div>
+			
 				{% endfor %}
 				{% endif %}
 
                 {% if category == "Civil" %}
 				{% for i in books %}
 
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+					
+				<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ i.flname }}" style="width:90%; height:250px; margin:10px 10px 10px 10px;">
+								{{ i.book_name }}
+								<p><a href="/editbook/{{ i.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ i.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{ i.book_name }}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
-					</div>
-
 				</div>
+
+
 				{% endfor %}
 				{% endif %}
 
@@ -295,43 +225,37 @@
 				{% for i in books %}
 
 				
-				<div class="col-sm-4" style="margin: 10px 0px">
-
-					<object data="/Media/{{ i.thumbnail }}" style="width: 70%; min-height: 300px;" type="application/pdf"></object>
-					<div class="row">
+				<div class="col-md-3">    
+						<div class="thumbnail">
+							
+								<img src="/{{ i.flname }}" style="width:90%; height:250px; margin:10px 10px 10px 10px;">
+								{{ i.book_name }}
+								<p><a href="/editbook/{{ i.id }}" class="label label-danger" rel="tooltip" title="Edit">Edit</a>
+								<a href="/Media/{{ i.thumbnail }}" class="label label-default" rel="tooltip" title="Download now">Download</a></p>
 						
-						<div class="col-sm-4">
-							{{ i.book_name }}
 						</div>
-
-						<div class="col-sm-2">
-							<a href="/editbook/{{ i.id }}" class="btn btn-primary active btn-sm">Edit</a>
-						</div>
-
-						<div class="col-sm-3">
-						<a href="/Media/{{i.thumbnail}}" class="btn btn-primary active btn-sm">View</a>
-						</div>
-						
-					</div>
-
 				</div>
+
 				{% endfor %}
 				{% endif %}
 
             {% endif %}
 
+        </div>
+        
+            <div class="row">
+				<div class="col-lg-12 col-md-12" style = "background-color:#b5dcb3;">
+					<center>Copyright © 2015 E-library by Akash</center>
+				</div>
 			</div>
+    </div>
 
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" bgcolor="#b5dcb3">
-			<center>Copyright © 2015 E-library by Akash</center>
-		</td>
-	</tr>
+    </font>
+    </div>
+			
 
-</table>
 
+	
 
 <script src="/static/jquery.js"></script>
 <script src="/static/bootstrap.min.js"></script>
