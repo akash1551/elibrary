@@ -1,6 +1,8 @@
 from django.db import models
 from time import time
 
+
+
 def get_upload_file_name(instance, filename):
     return "images/%s_%s" %(str(time()).replace('.','_'),filename.replace(' ', '_'))
 
@@ -12,7 +14,9 @@ class Books(models.Model):
     thumbnail=models.FileField(upload_to=get_upload_file_name)
     tag = models.TextField()
     category = models.TextField()
+    user_name = models.ForeignKey('Username')
 
-
-
+class Username(models.Model):
+	user_name = models.CharField(max_length=100)
+	
 # Create your models here.
