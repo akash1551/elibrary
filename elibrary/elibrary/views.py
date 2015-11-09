@@ -11,6 +11,7 @@ from django.contrib import admin
 from books.models import Books
 from django.db import IntegrityError
 import json
+from django.contrib.auth.decorators import login_required
 
 def hello(request):
     return render_to_response('login.html')
@@ -52,7 +53,6 @@ def register(request):
     return render_to_response('register.html')
 
 def register_user(request):
-    
     print request.POST
     """first_name = request.POST['first_name']
     last_name = request.POST['last_name']"""
@@ -60,17 +60,14 @@ def register_user(request):
     password = request.POST['password']
     email = request.POST['email']
 
-    if username!= None:
-        if password != None:
-            if email != None:
-                user = User(username=username,email=email)
-                user.set_password(password)
-                try:                            
-                    user.save()
-                except IntegrityError:
-                    print "User already Exists..."
-
-    return HttpResponseRedirect('/accounts/login/')
+    user = User(username=username,email=email)
+    user.set_password(password)
+    try:                            
+        user.save()
+    except IntegrityError:
+        print "User Already Exist"
+    return render_to_response('login.html')
+                    
 
 def register_success(request):
     return render_to_response('register_success.html')
@@ -81,15 +78,17 @@ def register_success(request):
     args['books'] = books
     return render_to_response('books_view.html', args)"""
 
+@login_required
 def home(request):
-    if request.user.is_authenticated():
-        books = Books.objects.filter(tag="")
-        args = {}
-        args['tag']=''
-        args['books'] = books
-        return render_to_response('home.html', args)
-    else:
-        return render_to_response('login.html')
+  #  if request.user.is_authenticated():
+    books = Books.objects.filter(tag="")
+    args = {}
+    args['tag']=''
+    args['username']=request.user
+    args['books'] = books
+    return render_to_response('home.html', args)
+    #else:
+     #   return render_to_response('login.html')
    
 
 def book_view(request):
